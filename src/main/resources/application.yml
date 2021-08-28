@@ -1,0 +1,25 @@
+server:
+  port: 9191
+spring :
+  application :
+    name : api-gateway
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      routes:
+        - id: TOPICS-SERVICE
+          uri: lb://TOPICS-SERVICE
+          predicates:
+            - Path=/topic/**
+        - id: QUESTIONS-SERVICE
+          uri: lb://QUESTIONS-SERVICE
+          predicates:
+            - Path=/question/**
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    hostname : localhost
+    serviceUrl :
+      defaultZone : http://localhost:8761/eureka/
