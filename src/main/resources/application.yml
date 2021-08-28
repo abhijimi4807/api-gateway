@@ -16,6 +16,11 @@ spring :
           uri: lb://QUESTIONS-SERVICE
           predicates:
             - Path=/question/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: QUESTIONS-SERVICE
+                fallbackuri: forward:/questionFallback
 eureka:
   client:
     fetch-registry: true
