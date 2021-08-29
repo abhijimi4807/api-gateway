@@ -28,3 +28,17 @@ eureka:
     hostname : localhost
     serviceUrl :
       defaultZone : http://localhost:8761/eureka/
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+##http://localhost:9191/actuator/hystrix.stream
